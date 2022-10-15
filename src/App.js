@@ -1,6 +1,8 @@
 import {useState,useEffect,useRef} from 'react';
 import './App.css';
 import TimerInput from './components/TimerInput/TimerInput';
+import { intialTimeinSeconds } from './constants/global';
+import { pauseButton, resetButton, resumeButton, startButton, timerHeading } from './constants/text';
 
 const formatTime=(timer)=>{
   let date=new Date()
@@ -11,7 +13,7 @@ const formatTime=(timer)=>{
 
 function App() {
   
-  const [selectedTimer,setSelectedTimer]=useState(180)
+  const [selectedTimer,setSelectedTimer]=useState(intialTimeinSeconds)
   const [timer,setTimer]=useState(selectedTimer)
   const [timerStarted,toggleTimer]=useState(false)
   const interval=useRef(null)
@@ -20,7 +22,15 @@ function App() {
     
     if(interval.current) clearInterval(interval.current)
 
-    interval.current=setInterval(()=>{setTimer(timer=>timer-1)},1000)
+    interval.current=setInterval(()=>{setTimer(timer=>
+      {
+
+        if (timer!==0) return timer-1
+      
+        clearInterval(interval.current)
+        
+        return 0  
+      })},1000)
   }
 
   useEffect(()=>{
@@ -48,8 +58,8 @@ function App() {
       <div>
       {
         timerStarted?(<div className='timer' >
-        <h1>{'Timer'}</h1>
-        <span className='time'>{formatTime(timer)}</span>
+        <h1>{timerHeading}</h1>
+        <span className={`${timer===0?'red':'yellow'}`}>{formatTime(timer)}</span>
           </div>
         ):
         <TimerInput timer={selectedTimer} updateTimerValue={updateTimerValue}/>
@@ -57,10 +67,10 @@ function App() {
       }
       </div>
       <div className='btnContainer'>
-        <button  onClick={()=>toggleTimer(true)}>Start</button>
-        <button onClick={()=>clearInterval(interval.current)}>Pause</button>
-        <button onClick={startInterval}>Resume</button>
-        <button onClick={()=>toggleTimer(false)}>Reset</button>
+        <button  onClick={()=>toggleTimer(true)}>{startButton}</button>
+        <button onClick={()=>clearInterval(interval.current)}>{pauseButton}</button>
+        <button onClick={startInterval}>{resumeButton}</button>
+        <button onClick={()=>toggleTimer(false)}>{resetButton}</button>
 
       </div>
 

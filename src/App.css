@@ -3,32 +3,32 @@
   background-color: black;
   width: 100vw;
   height: 100vh;
-  padding: 15% 0;
+  padding: 20vh 0;
   color:gainsboro;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.red{
+  color: #d1042b;
 }
 
-.timer{
-  font-size: 3rem;
+.yellow{
+  color: rgb(236, 170, 47);
 }
+.timer{
+  font-size: 7rem;
+}
+
 .timer h1{
+  font-size: inherit;
   margin: 0;
 }
 
-.timer span{
-  font-size: 7rem;
-  color: rgb(236, 170, 47);
-}
 
 
 .btnContainer{
   padding: 3%;
   margin: auto;
-  width: 60%;
+  width: 50%;
   display: flex;
   justify-content: space-around;
 }
@@ -39,35 +39,20 @@
   border-radius: 100%;
   width: 75px;
   height: 75px;
-  color: green
+  color: green;
+  cursor: pointer;
 
 }
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+
+
+@media only screen and (max-width:769px){
+  
+  .btnContainer{
+    width:90%;
   }
-}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  .timer{
+    font-size: 5rem;
   }
-  to {
-    transform: rotate(360deg);
-  }
+  
 }

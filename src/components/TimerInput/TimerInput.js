@@ -1,43 +1,49 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
+import { setTimerHeading } from '../../constants/text'
 import './index.css'
+
+const timeFormater=(value)=>Number(value)<10?'0'+Number(value):Number(value)
+
+const valueUpdater=(value,limit,updater)=>{
+
+    if(Number(value)<=limit && Number(value)>=0)
+        updater(()=>timeFormater(value))
+    
+}
+
 const TimerInput=({updateTimerValue,timer})=>{
 
-    const [hour,setHours]=useState((Math.floor(timer/3600)||'00'))
-    const [minutes,setMinutes]=useState((Math.floor(timer/60)%60||'00'))
-    const [seconds,setSeconds]=useState(timer%60||'00')
+    const [hour,setHours]=useState(timeFormater(Math.floor(timer/3600)))
+    const [minutes,setMinutes]=useState(timeFormater(Math.floor(timer/60)%60))
+    const [seconds,setSeconds]=useState(timeFormater(timer%60))
 
-    console.log(minutes)
     const handleChange=(e)=>{
 
         let value=e.target.value
-        let limit,updater
+    
         switch(e.target.name){
-            case 'hour':
-                limit=23
-                updater=setHours
+            case 'hour': valueUpdater(value,23,setHours)
             break;
-            case 'minutes': 
-                limit=59
-                updater=setMinutes
-                // if(value==='') setMinutes(valu
+            case 'minutes': valueUpdater(value,59,setMinutes)
             break;
-            case 'seconds': 
-                limit=59
-                updater=setSeconds
+            case 'seconds': valueUpdater(value,59,setSeconds)
             break;
             default:
                 console.error('Invalid Input')
         }
-        if(Number(value)<=limit && Number(value)>=0){
-            updater(Number(value)<10?'0'+Number(value):Number(value))
-        }
-        updateTimerValue(hour,minutes,seconds)
+        
     }
+
+    useEffect(()=>{
+
+        updateTimerValue(hour,minutes,seconds)
+
+    },[minutes,seconds,hour,updateTimerValue])
 
     return(
         <>
         <div className='timeInputContainer'>
-            <h1>Set Timer </h1>
+            <h1>{setTimerHeading}</h1>
             <div onChange={handleChange} >
                 <input className='timeInput' value={hour} type={"number"} name="hour" />:
                 <input className='timeInput' name="minutes" type={"number"} value={minutes}/>:
