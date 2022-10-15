@@ -1,0 +1,28 @@
+.timeInput{
+
+    width: 10%;
+    text-align: center;
+    font-size: inherit;
+    border-radius: 5px;
+    border: 0;
+    color:gainsboro;
+    background-color: black;
+    font-size: 7rem;
+    /* box-shadow: ; */
+
+}
+
+.timeInputContainer h1{
+    margin: 0;
+}
+
+.timeInputContainer{
+    font-size: 3rem;
+
+}
+
+.timeInputContainer div{
+    text-align: center;
+    margin: auto;
+    font-size: 7rem;
+}

@@ -1,5 +1,10 @@
 .App {
   text-align: center;
+  background-color: black;
+  width: 100vw;
+  height: 100vh;
+  padding: 15% 0;
+  color:gainsboro;
 }
 
 .App-logo {
@@ -7,6 +12,36 @@
   pointer-events: none;
 }
 
+.timer{
+  font-size: 3rem;
+}
+.timer h1{
+  margin: 0;
+}
+
+.timer span{
+  font-size: 7rem;
+  color: rgb(236, 170, 47);
+}
+
+
+.btnContainer{
+  padding: 3%;
+  margin: auto;
+  width: 60%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.btnContainer button{
+  background-color: inherit;
+  border: 1px solid green;
+  border-radius: 100%;
+  width: 75px;
+  height: 75px;
+  color: green
+
+}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
